@@ -95,7 +95,7 @@
         </fieldset>
 		<fieldset name="filter" label="MOD_JDOWNLOADS_TOP_SELECTION_TITLE">
 		
-				     <field name="Selection" type="list" default="Hits" label="MOD_JDOWNLOADS_Top_Selection" description="MOD_JDOWNLOADS_RELATED_FIELD_ORDER_DESC">
+				     <field name="Selection" type="list" default="Hits" label="MOD_JDOWNLOADS_TOP_SELECTION" description="MOD_JDOWNLOADS_RELATED_FIELD_ORDER_DESC">
                     <option value="Hits">MOD_JDOWNLOADS_TOP_HITS</option>
                     <option value="Rated">MOD_JDOWNLOADS_TOP_RATED</option>
                     <option value="Updated">MOD_JDOWNLOADS_TOP_UPDATED</option>
@@ -113,13 +113,13 @@
 		<field name="download_ordering" type="list" default="Default" label="MOD_JDOWNLOADS_TOP_FIELD_ORDER" description="MOD_JDOWNLOADS_TOP_FIELD_ORDER_DESC">
 			<option value="Default">MOD_JDOWNLOADS_TOP_ORDER_DEFAULT</option>
 			<option value="a.ordering">MOD_JDOWNLOADS_TOP_ORDER_MANAGER</option>
-			<option value="a.downloads">MOD_JDOWNLOADS_TOP_ORDER_HITS</option>
+			<option value="a.downloads">MOD_JDOWNLOADS_TOP_HITS</option>
 			<option value="a.title">MOD_JDOWNLOADS_TOP_ORDER_TITLE</option>
 			<option value="a.id">MOD_JDOWNLOADS_TOP_ORDER_ID</option>
 			<option value="a.alias">MOD_JDOWNLOADS_TOP_ORDER_ALIAS</option>
-			<option value="a.created">MOD_JDOWNLOADS_TOP_ORDER_CREATED_DATE</option>
-			<option value="a.modified">MOD_JDOWNLOADS_TOP_ORDER_MODIFIED_DATE</option>
-			<option value="rating">MOD_JDOWNLOADS_TOP_ORDER_RATING</option>
+			<option value="a.created">MOD_JDOWNLOADS_TOP_LATEST</option>
+			<option value="a.modified">MOD_JDOWNLOADS_TOP_UPDATED</option>
+			<option value="rating">MOD_JDOWNLOADS_TOP_RATED</option>
 		</field>
 		
 		

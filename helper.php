@@ -60,13 +60,15 @@ class modJdownloadsTopHelper
 			$model->setState('filter.additional', 'ROUND(r.rating_sum / r.rating_count, 0) >='. $params->get('Rating_min') );
 		}
 
-        // Set sort ordering
+        // Set sort ordering default
         $ordering = 'a.downloads';
-        $dir = 'DESC';
+        $dir = 'DESC'; //Default is desc for everything
 		
-		//sort column
+		
+		//Retrieve ordering column from parameters
 		if ($params->get('download_ordering') =='Default') {
-		
+			
+			//Find which column sorting match the selection
 			switch ($params->get('Selection')) {
 				case 'Hits':
 				 $ordering = 'a.downloads';
@@ -78,6 +80,7 @@ class modJdownloadsTopHelper
 				 $ordering = 'a.modified' ;
 				 break;
 				case 'Latest':
+				// or should it be ordered wtih ID?
 				 $ordering = 'a.created';
 				 break;
 				default: 
@@ -85,39 +88,43 @@ class modJdownloadsTopHelper
 			}	
 		}
 		else {
+			//IF not default get download order from config 
 			$ordering = $params->get('download_ordering','a.downloads');
 		}
 		
-		
-		
 		$model->setState('list.ordering', $ordering);
 
-		// Sort order
-		if ($params->get('download_ordering_direction') =='Default') {
-			$dir='DESC';
+
+		// Sort order direction
+		// if it is not random or default get the value from the config		
+		if ($params->get('download_ordering_direction') !='Random' AND $params->get('download_ordering_direction') =='Default'){
+			// if it is not random or default get the value from the config
+			$dir= $params->get('download_ordering_direction','DESC');		
 		}
-		elseif ($params->get('download_ordering_direction') !='Random') { 
-			$dir= $params->get('download_ordering_direction','DESC');
-		}
+		
         $model->setState('list.direction', $dir);
 		
-
+		
+		//Retrieve records from database
         $items = $model->getItems();
 		
-		//Set the number of items to show . Only important for random.
-		$Number_of_downloads = $params->get('sum_view');
+		
+		//If sort order was random we need to shuffle the recieved rows
+		//And set the number of items to show .
+		$Number_of_rows = $params->get('sum_view');
 		if ($params->get('download_ordering_direction') =='Random') { 
 			shuffle($items);
-			$Number_of_downloads = $params->get('random_selection');
+			$Number_of_rows = $params->get('random_selection');
 		}
 
 		//delete rows from array to get to correct number of rows
 		$i= 0;
-		while (count($items) >$Number_of_downloads) {
+		while (count($items) >$Number_of_rows) {
 			unset($items[$i]);
 			$i++;
 		}
-		$items = array_merge($items); 
+		$items = array_merge($items); //to reset row numbers
+		
 		
         foreach ($items  as &$item)
         {
