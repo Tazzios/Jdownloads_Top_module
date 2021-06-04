@@ -22,8 +22,7 @@
                 <field name="text_before" type="textarea" cols="30" rows="2" default="" label="MOD_JDOWNLOADS_TOP_TEXT_BEFORE_TITLE" description="MOD_JDOWNLOADS_TOP_TEXT_BEFORE_DESC"/>
                 <field name="text_after" type="textarea" cols="30" rows="2" default="" label="MOD_JDOWNLOADS_TOP_TEXT_AFTER_TITLE" description="MOD_JDOWNLOADS_TOP_TEXT_AFTER_DESC"/>
 				<field name="spacer1" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
-                <field name="catid" type="jdCategorySelectPure" multiple="true" size="10" default="" label="MOD_JDOWNLOADS_TOP_CAT_ID_TITLE" description="MOD_JDOWNLOADS_TOP_CAT_ID_DESC"/>
-                <field name="sum_view" type="text" default="5" label="MOD_JDOWNLOADS_TOP_NO_FILES_TITLE" description="MOD_JDOWNLOADS_TOP_NO_FILES_DESC"/>
+                
                 <field name="sum_char" type="text" default="" label="MOD_JDOWNLOADS_TOP_TITLE_CHAR_LENGTH_TITLE" description="MOD_JDOWNLOADS_TOP_TITLE_CHAR_LENGTH_DESC"/>
                 <field name="short_char" type="text" default="" label="MOD_JDOWNLOADS_TOP_TITLE_REPLACE_CHAR_TITLE" description="MOD_JDOWNLOADS_TOP_TITLE_REPLACE_CHAR_DESC"/>
                 <field name="short_version" type="text" default="" label="MOD_JDOWNLOADS_TOP_CHAR_BEFORE_RELEASE_TITLE" description="MOD_JDOWNLOADS_TOP_CHAR_BEFORE_RELEASE_DESC"/>
@@ -94,6 +93,46 @@
                         <option value="center">MOD_JDOWNLOADS_TOP_CENTER</option>
                 </field>
         </fieldset>
+		<fieldset name="filter" label="MOD_JDOWNLOADS_TOP_SELECTION_TITLE">
+		
+				     <field name="Selection" type="list" default="Hits" label="MOD_JDOWNLOADS_Top_Selection" description="MOD_JDOWNLOADS_RELATED_FIELD_ORDER_DESC">
+                    <option value="Hits">MOD_JDOWNLOADS_TOP_HITS</option>
+                    <option value="Rated">MOD_JDOWNLOADS_TOP_RATED</option>
+                    <option value="Updated">MOD_JDOWNLOADS_TOP_UPDATED</option>
+                    <option value="Latest">MOD_JDOWNLOADS_TOP_LATEST</option>
+                </field>
+				
+			<field name="Rating_min" type="text" showon="Selection:Rated"  label="MOD_JDOWNLOADS_TOP_RATING_MIN" description="MOD_JDOWNLOADS_TOP_RATING_MIN_DESC"/>
+		
+		<field name="catid" type="jdCategorySelectPure" multiple="true" size="10" default="" label="MOD_JDOWNLOADS_TOP_CAT_ID_TITLE" description="MOD_JDOWNLOADS_TOP_CAT_ID_DESC"/>
+		
+		<field name="levels" type="text" default="1" label="MOD_JDOWNLOADS_TOP_CAT_DEPTH" description="MOD_JDOWNLOADS_TOP_CAT_DEPTH_DESC" />
+		
+        <field name="sum_view" type="text" default="5" label="MOD_JDOWNLOADS_TOP_NO_FILES_TITLE" description="MOD_JDOWNLOADS_TOP_NO_FILES_DESC"/>
+				
+		<field name="download_ordering" type="list" default="Default" label="MOD_JDOWNLOADS_TOP_FIELD_ORDER" description="MOD_JDOWNLOADS_TOP_FIELD_ORDER_DESC">
+			<option value="Default">MOD_JDOWNLOADS_TOP_ORDER_DEFAULT</option>
+			<option value="a.ordering">MOD_JDOWNLOADS_TOP_ORDER_MANAGER</option>
+			<option value="a.downloads">MOD_JDOWNLOADS_TOP_ORDER_HITS</option>
+			<option value="a.title">MOD_JDOWNLOADS_TOP_ORDER_TITLE</option>
+			<option value="a.id">MOD_JDOWNLOADS_TOP_ORDER_ID</option>
+			<option value="a.alias">MOD_JDOWNLOADS_TOP_ORDER_ALIAS</option>
+			<option value="a.created">MOD_JDOWNLOADS_TOP_ORDER_CREATED_DATE</option>
+			<option value="a.modified">MOD_JDOWNLOADS_TOP_ORDER_MODIFIED_DATE</option>
+			<option value="rating">MOD_JDOWNLOADS_TOP_ORDER_RATING</option>
+		</field>
+		
+		
+		<field name="download_ordering_direction" type="list" default="ASC" label="MOD_JDOWNLOADS_TOP_DIRECTION" description="MOD_JDOWNLOADS_TOP_DIRECTION_DESC">
+			<option value="Default">MOD_JDOWNLOADS_TOP_ORDER_DIRECTION_DEFAULT</option>
+			<option value="DESC">MOD_JDOWNLOADS_TOP_DIRECTION_DESCENDING</option>
+			<option value="ASC">MOD_JDOWNLOADS_TOP_DIRECTION_ASCENDING</option>
+			<option value="Random">MOD_JDOWNLOADS_TOP_ORDER_DIRECTION_RANDOM</option>
+		</field>
+		
+		<field name="random_selection" type="text" showon="download_ordering_direction:Random" default="5" label="MOD_JDOWNLOADS_TOP_RAND_SELECTION_TITLE" description="MOD_JDOWNLOADS_TOP_NO_FILES_DESC"/>
+				
+        </fieldset>        
 		<fieldset name="advanced">
 			<field name="layout" type="modulelayout" default="" label="MOD_JDOWNLOADS_TOP_LAYOUT_TITLE" description="MOD_JDOWNLOADS_TOP_LAYOUT_DESC" />
 			<field name="moduleclass_sfx" type="text" default="" label="MOD_JDOWNLOADS_TOP_CLASS_SUFFIX_TITLE" description="MOD_JDOWNLOADS_TOP_CLASS_SUFFIX_DESC"/>

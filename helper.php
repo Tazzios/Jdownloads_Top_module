@@ -53,17 +53,73 @@ class modJdownloadsTopHelper
 
         // Filter by language
         $model->setState('filter.language', $app->getLanguageFilter());
+		
+		//optional apply minium rating if the selection is based on rated
+		if ($params->get('Selection') =='Rated' and !empty($params->get('Rating_min')) and is_numeric($params->get('Rating_min')) ) {
+			//same rating formule as in models a filter.rating would be nice to keep calculation in one place.
+			$model->setState('filter.additional', 'ROUND(r.rating_sum / r.rating_count, 0) >='. $params->get('Rating_min') );
+		}
 
         // Set sort ordering
         $ordering = 'a.downloads';
         $dir = 'DESC';
+		
+		//sort column
+		if ($params->get('download_ordering') =='Default') {
+		
+			switch ($params->get('Selection')) {
+				case 'Hits':
+				 $ordering = 'a.downloads';
+				 break;
+				case 'Rated':
+				 $ordering = 'rating';
+				 break;
+				case 'Updated':
+				 $ordering = 'a.modified' ;
+				 break;
+				case 'Latest':
+				 $ordering = 'a.created';
+				 break;
+				default: 
+				 $ordering = 'a.downloads';
+			}	
+		}
+		else {
+			$ordering = $params->get('download_ordering','a.downloads');
+		}
+		
+		
+		
+		$model->setState('list.ordering', $ordering);
 
-        $model->setState('list.ordering', $ordering);
+		// Sort order
+		if ($params->get('download_ordering_direction') =='Default') {
+			$dir='DESC';
+		}
+		elseif ($params->get('download_ordering_direction') !='Random') { 
+			$dir= $params->get('download_ordering_direction','DESC');
+		}
         $model->setState('list.direction', $dir);
+		
 
         $items = $model->getItems();
+		
+		//Set the number of items to show . Only important for random.
+		$Number_of_downloads = $params->get('sum_view');
+		if ($params->get('download_ordering_direction') =='Random') { 
+			shuffle($items);
+			$Number_of_downloads = $params->get('random_selection');
+		}
 
-        foreach ($items as &$item)
+		//delete rows from array to get to correct number of rows
+		$i= 0;
+		while (count($items) >$Number_of_downloads) {
+			unset($items[$i]);
+			$i++;
+		}
+		$items = array_merge($items); 
+		
+        foreach ($items  as &$item)
         {
             $item->slug = $item->id . ':' . $item->alias;
             $item->catslug = $item->catid . ':' . $item->category_alias;
@@ -75,6 +131,8 @@ class modJdownloadsTopHelper
             } else {
                 $item->link = JRoute::_('index.php?option=com_users&view=login');
             }
+			$i++;
+			if ($i == 0) {break; }
         }
         return $items;        
 	}
