@@ -7,7 +7,7 @@
         <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
         <authorEmail>info@jDownloads.com</authorEmail>
         <authorUrl>www.jDownloads.com</authorUrl>
-        <version>3.9.7</version>
+        <version>3.9.8</version>
         <description>MOD_JDOWNLOADS_TOP_XML_DESCRIPTION</description>
         <files>
                 <filename module="mod_jdownloads_top">mod_jdownloads_top.php</filename>
@@ -35,7 +35,23 @@
                         <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
                 </field>
 				<field name="view_tooltip_length" type="text" default="100" label="MOD_JDOWNLOADS_TOP_VIEW_TOOLTIP_LENGTH" description=""/>
-				<field name="spacer2" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
+				<field name="spacer-date" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
+                <field name="view_date" type="radio" class="btn-group" default="1" label="MOD_JDOWNLOADS_TOP_SHOW_DATE_TITLE" description="MOD_JDOWNLOADS_TOP_SHOW_DATE_DESC">
+                		<option value="1">MOD_JDOWNLOADS_TOP_YES</option>
+			            <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
+		        </field>
+                <field name="view_date_same_line" type="radio" class="btn-group" default="0" label="MOD_JDOWNLOADS_TOP_VIEW_DATE_IN_THE_SAME_LINE_TITLE" description="MOD_JDOWNLOADS_TOP_VIEW_DATE_IN_THE_SAME_LINE_DESC">
+                        <option value="1">MOD_JDOWNLOADS_TOP_YES</option>
+                        <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
+                </field>
+				<field name="view_date_text" type="text" default="" label="MOD_JDOWNLOADS_TOP_VIEW_DATE_TEXT_TITLE" description="MOD_JDOWNLOADS_TOP_VIEW_DATE_TEXT_DESC"/>
+                <field name="date_format" type="text" default="" label="MOD_JDOWNLOADS_TOP_DATE_FORMAT_TITLE" description="MOD_JDOWNLOADS_TOP_DATE_FORMAT_DESC"/>
+                <field name="date_alignment" type="list" label="MOD_JDOWNLOADS_TOP_DATE_ALIGN_TITLE" default="left" description="MOD_JDOWNLOADS_TOP_DATE_ALIGN_DESC">
+                        <option value="left">MOD_JDOWNLOADS_TOP_LEFT</option>
+                        <option value="right">MOD_JDOWNLOADS_TOP_RIGHT</option>
+                        <option value="center">MOD_JDOWNLOADS_TOP_CENTER</option>
+                </field> 
+				<field name="spacer-hits" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
                 <field name="view_hits" type="radio" class="btn-group" default="1" label="MOD_JDOWNLOADS_TOP_SHOW_HITS_TITLE" description="MOD_JDOWNLOADS_TOP_SHOW_HITS_DESC">
                 		<option value="1">MOD_JDOWNLOADS_TOP_YES</option>
 			            <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
@@ -50,12 +66,16 @@
                         <option value="right">MOD_JDOWNLOADS_TOP_RIGHT</option>
                         <option value="center">MOD_JDOWNLOADS_TOP_CENTER</option>
                 </field> 
-				<field name="spacer3" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
+				<field name="spacer-mime" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
                 <field name="view_pics" type="radio" class="btn-group" label="MOD_JDOWNLOADS_TOP_VIEW_MIME_PIC" default="1" description="MOD_JDOWNLOADS_TOP_VIEW_MIME_PIC_DESC">
                         <option value="1">MOD_JDOWNLOADS_TOP_YES</option>
                         <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
                 </field>
                 <field name="view_pics_size" type="text" default="18" label="MOD_JDOWNLOADS_TOP_SET_SIZE_FROM_MIME_PICS" description="MOD_JDOWNLOADS_TOP_SET_SIZE_FROM_MIME_PICS_DESC"/>
+				<field name="view_pics_link" type="radio" class="btn-group" label="MOD_JDOWNLOADS_TOP_VIEW_MIME_PIC_LINK" default="1" description="MOD_JDOWNLOADS_TOP_VIEW_MIME_PIC_LINK_DESC">
+                        <option value="1">MOD_JDOWNLOADS_TOP_YES</option>
+                        <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
+				</field>
                 <field name="view_numerical_list" type="radio" class="btn-group" label="MOD_JDOWNLOADS_TOP_VIEW_NUMERICAL_LIST" default="0" description="MOD_JDOWNLOADS_TOP_VIEW_NUMERICAL_LIST_DESC">
                         <option value="1">MOD_JDOWNLOADS_TOP_YES</option>
                         <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
@@ -69,6 +89,11 @@
 				        <option value="1">MOD_JDOWNLOADS_TOP_YES</option>
                         <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
                 </field>
+				<field name="view_thumbnails_link" type="radio" class="btn-group" default="1" label="MOD_JDOWNLOADS_TOP_VIEW_THUMBNAILS_LINK_TITLE" description="MOD_JDOWNLOADS_TOP_VIEW_THUMBNAILS_LINK_DESC">				
+				        <option value="1">MOD_JDOWNLOADS_TOP_YES</option>
+                        <option value="0">MOD_JDOWNLOADS_TOP_NO</option>
+                </field>
+				
                 <field name="view_thumbnails_size" type="text" default="100" label="MOD_JDOWNLOADS_TOP_VIEW_THUMBNAILS_SIZE_TITLE" description="MOD_JDOWNLOADS_TOP_VIEW_THUMBNAILS_SIZE_DESC"/>
 				<field name="spacer5" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
                 <field name="cat_show" type="radio" class="btn-group" default="1" label="MOD_JDOWNLOADS_TOP_CAT_SHOW_TITLE" description="MOD_JDOWNLOADS_TOP_CAT_SHOW_DESC">
@@ -134,7 +159,7 @@
 				
         </fieldset>        
 		<fieldset name="advanced">
-			<field name="layout" type="modulelayout" default="" label="MOD_JDOWNLOADS_TOP_LAYOUT_TITLE" description="MOD_JDOWNLOADS_TOP_LAYOUT_DESC" />
+			<field name="layout" type="modulelayout" default="default" label="MOD_JDOWNLOADS_TOP_LAYOUT_TITLE" description="MOD_JDOWNLOADS_TOP_LAYOUT_DESC" />
 			<field name="moduleclass_sfx" type="text" default="" label="MOD_JDOWNLOADS_TOP_CLASS_SUFFIX_TITLE" description="MOD_JDOWNLOADS_TOP_CLASS_SUFFIX_DESC"/>
 			<field name="spacer6" type="spacer" default="" label="MOD_JDOWNLOADS_TOP_SPACER" description="" />
 			<field name="cache" type="list" default="1" label="MOD_JDOWNLOADS_TOP_CACHE_LABEL" description="MOD_JDOWNLOADS_TOP_CACHE_DESCRIPTION">

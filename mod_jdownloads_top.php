@@ -1,12 +1,12 @@
 <?php
 /**
-* @version $Id: mod_jdownloads_top.php v3.8
+* @version $Id: mod_jdownloads_top.php v3.9
 * @package mod_jdownloads_top
 * @copyright (C) 2018 Arno Betz
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 * @author Arno Betz http://www.jDownloads.com
 *
-* This modul shows you the most recent downloads from the jDownloads component. 
+* This module shows you the top (most downloaded) Downloads from the jDownloads component. 
 */
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -19,6 +19,9 @@ require_once( JPATH_ROOT . DS . 'components' . DS . 'com_jdownloads' . DS . 'hel
 
     $Itemid  = JRequest::getVar("Itemid");
     
+	//add css
+    $document = JFactory::getDocument();
+	$document->addStyleSheet( JURI::base()."components/com_jdownloads/assets/css/jdownloads_modules.css");
     // get published root menu link
     $db->setQuery("SELECT id from #__menu WHERE link = 'index.php?option=com_jdownloads&view=categories' and published = 1 AND client_id = 0");
     $root_itemid = $db->loadResult();
@@ -43,15 +46,26 @@ require_once( JPATH_ROOT . DS . 'components' . DS . 'com_jdownloads' . DS . 'hel
     $short_char            = $params->get( 'short_char' ) ; 
     $short_version         = $params->get( 'short_version' );
     $detail_view           = $params->get( 'detail_view' ) ; 
+    $view_date             = $params->get( 'view_date' ) ;
+    $view_date_same_line   = $params->get( 'view_date_same_line' );
+	$view_date_text        = $params->get( 'view_date_text' );
+    $view_date_text        = modJdownloadsTopHelper::getOnlyLanguageSubstring($view_date_text);	
+    // We use the standard short date format from the activated language when here is not a format defined 
+    $date_format           = $params->get( 'date_format', JText::_('DATE_FORMAT_LC4') );
+	$date_alignment        = $params->get( 'date_alignment' );	
     $view_hits             = $params->get( 'view_hits' ) ;
     $view_hits_same_line   = $params->get( 'view_hits_same_line' );
     $hits_label            = $params->get( 'hits_label' );
+	$hits_label            = modJdownloadsTopHelper::getOnlyLanguageSubstring($hits_label);
     $hits_alignment        = $params->get( 'hits_alignment' );
     $view_pics             = $params->get( 'view_pics' ) ;
     $view_pics_size        = $params->get( 'view_pics_size' ) ;
+		//cam
+	$view_pics_link        = $params->get( 'view_pics_link' ) ;
     $view_numerical_list   = $params->get( 'view_numerical_list' );
     $view_thumbnails       = $params->get( 'view_thumbnails' );
     $view_thumbnails_size  = $params->get( 'view_thumbnails_size' );
+	$view_thumbnails_link  = $params->get( 'view_thumbnails_link' );
     $view_thumbnails_dummy = $params->get( 'view_thumbnails_dummy' );
     $hits_alignment        = $params->get( 'hits_alignment' ); 
     $cat_show              = $params->get( 'cat_show' );
@@ -71,7 +85,8 @@ require_once( JPATH_ROOT . DS . 'components' . DS . 'com_jdownloads' . DS . 'hel
     
     $cat_show_text = trim($cat_show_text);
     if ($cat_show_text) $cat_show_text = ' '.$cat_show_text.' ';
-
+    $view_date_text = trim($view_date_text);
+	if ($view_date_text) $view_date_text = $view_date_text.' ';
     if ($sum_view == 0) $sum_view = 5;
     $option = 'com_jdownloads';
         
